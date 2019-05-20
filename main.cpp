@@ -31,6 +31,71 @@ public:
 			glVertex3f(this->x, this->y * - 1, this->z);
 			glVertex3f(this->x * - 1, this->y, this->z);
 		glEnd();
+
+		// Front
+		glColor3f(0.1f, 0.5f, 0.3f);
+		glBegin(GL_TRIANGLES);
+			glVertex3f(this->x * - 1, this->y * - 1, this->z * - 1);
+			glVertex3f(this->x * - 1, this->y, this->z * - 1);
+			glVertex3f(this->x, this->y * - 1, this->z * - 1);
+		glEnd();
+		glBegin(GL_TRIANGLES);
+			glVertex3f(this->x, this->y, this->z * - 1);
+			glVertex3f(this->x * - 1, this->y, this->z * - 1);
+			glVertex3f(this->x, this->y * - 1, this->z * - 1);
+		glEnd();
+
+		// left
+		glColor3f(0.3f, 0.5f, 0.6f);
+		glBegin(GL_TRIANGLES);
+			glVertex3f(this->x * - 1, this->y * - 1, this->z * - 1);
+			glVertex3f(this->x * - 1, this->y * - 1, this->z);
+			glVertex3f(this->x * - 1, this->y, this->z * - 1);
+		glEnd();
+		glBegin(GL_TRIANGLES);
+			glVertex3f(this->x * - 1, this->y, this->z);
+			glVertex3f(this->x * - 1, this->y * - 1, this->z);
+			glVertex3f(this->x * - 1, this->y, this->z * - 1);
+		glEnd();
+
+		// Right
+		glColor3f(0.2f, 0.2f, 0.2f);
+		glBegin(GL_TRIANGLES);
+			glVertex3f(this->x, this->y, this->z);
+			glVertex3f(this->x, this->y, this->z * - 1);
+			glVertex3f(this->x, this->y * - 1, this->z);
+		glEnd();
+		glBegin(GL_TRIANGLES);
+			glVertex3f(this->x, this->y * - 1, this->z * - 1);
+			glVertex3f(this->x, this->y, this->z * - 1);
+			glVertex3f(this->x, this->y * - 1, this->z);
+		glEnd();
+
+		// Top
+		glColor3f(0.6f, 0.0f, 0.0f);
+		glBegin(GL_TRIANGLES);
+			glVertex3f(this->x, this->y, this->z);
+			glVertex3f(this->x, this->y, this->z * - 1);
+			glVertex3f(this->x * - 1, this->y, this->z * - 1);
+		glEnd();
+		glBegin(GL_TRIANGLES);
+			glVertex3f(this->x * - 1, this->y, this->z);
+			glVertex3f(this->x, this->y, this->z);
+			glVertex3f(this->x * - 1, this->y, this->z * - 1);
+		glEnd();
+
+		// Bottom
+		glColor3f(0.4f, 0.0f, 0.4f);
+		glBegin(GL_TRIANGLES);
+			glVertex3f(this->x * - 1, this->y * - 1, this->z * - 1);
+			glVertex3f(this->x * - 1, this->y * - 1, this->z);
+			glVertex3f(this->x, this->y * - 1, this->z);
+		glEnd();
+		glBegin(GL_TRIANGLES);
+			glVertex3f(this->x, this->y * - 1, this->z * - 1);
+			glVertex3f(this->x * - 1, this->y * - 1, this->z * - 1);
+			glVertex3f(this->x, this->y * - 1, this->z);
+		glEnd();
 	}
 };
 
@@ -79,7 +144,7 @@ int main(int argc, char **argv)
 	// Initialize GLUT and process user parameters
 	glutInit(&argc, argv);
 
-	cubes[0] = Cube(0.3, 0.3, 0.3);
+	cubes[0] = Cube(0.1, 0.1, 0.1);
 
 	// Request double buffered true color window with Z-buffer
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
