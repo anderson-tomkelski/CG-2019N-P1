@@ -115,7 +115,9 @@ void display()
 	glRotatef(rX, 1.0f, 0.0f, 0.0f);
 	glRotatef(rY, 0.0f, 1.0f, 0.0f);
 
-	glColor3f(0.4f, 0.3f, 0.5f);
+	cubes[0].draw();
+
+	glTranslatef(0.5, 0.5, 0.5);
 	cubes[0].draw();
 
 	glFlush();
@@ -145,6 +147,7 @@ int main(int argc, char **argv)
 	glutInit(&argc, argv);
 
 	cubes[0] = Cube(0.1, 0.1, 0.1);
+	cubes[1] = Cube(0.1, 0.1, 0.1);
 
 	// Request double buffered true color window with Z-buffer
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
