@@ -1,8 +1,6 @@
 #include <GL/glut.h>
 #include <GL/gl.h>
 
-// Rotate X
-GLfloat rX = 0;
 // Rotate Y
 GLfloat rY = 0;
 GLfloat rZ = 0;
@@ -132,22 +130,6 @@ void display()
 	glutSwapBuffers();
 }
 
-void keyboard(int key, int x, int y)
-{
-	if (key == GLUT_KEY_RIGHT) {
-		rY += 5;
-	} else if (key == GLUT_KEY_LEFT) {
-		rY -= 5;
-	} else if (key == GLUT_KEY_DOWN) {
-		rX -= 5;
-	} else if (key == GLUT_KEY_UP) {
-		rX += 5;
-	}
-
-	// Request display update
-	glutPostRedisplay();
-}
-
 void update(int value)
 {
 	rY -= 5;
@@ -180,7 +162,6 @@ int main(int argc, char **argv)
 
 	// Callback functions
 	glutDisplayFunc(display);
-	glutSpecialFunc(keyboard);
 
 	// Pass control to GLUT for events
 	glutTimerFunc(UPDATE_INTERVAL_MS, update, 0);
