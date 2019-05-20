@@ -3,7 +3,9 @@
 
 // Rotate Y
 GLfloat rY = 0;
+// Rotate Z
 GLfloat rZ = 0;
+// Rotate Z in screen
 GLfloat rrZ = 0;
 
 const float FRAMES_PER_SECOND = 30;
@@ -11,19 +13,22 @@ const float UPDATE_INTERVAL_MS = 1000 / FRAMES_PER_SECOND;
 
 class Cube {
 public:
-	float x, y, z;
+	float x, y, z, r, g, b;
 
 	Cube(){}
 
-	Cube(float x, float y, float z){
+	Cube(float x, float y, float z, float r, float g, float b){
 		this->x = x;
 		this->y = y;
 		this->z = z;
+		this->r = r;
+		this->g = g;
+		this->b = b;
 	}
 	
 	void draw(){
 		//Back
-		glColor3f(0.4f, 0.3f, 0.5f);
+		glColor3f(this->r, this->g, this->b);
 		glBegin(GL_TRIANGLES);
 			glVertex3f(this->x, this->y, this->z);
 			glVertex3f(this->x, this->y * - 1, this->z);
@@ -36,7 +41,7 @@ public:
 		glEnd();
 
 		// Front
-		glColor3f(0.1f, 0.5f, 0.3f);
+		glColor3f(this->r - 0.3, this->g + 0.2, this->b - 0.2);
 		glBegin(GL_TRIANGLES);
 			glVertex3f(this->x * - 1, this->y * - 1, this->z * - 1);
 			glVertex3f(this->x * - 1, this->y, this->z * - 1);
@@ -49,7 +54,7 @@ public:
 		glEnd();
 
 		// left
-		glColor3f(0.3f, 0.5f, 0.6f);
+		glColor3f(this->r - 0.1, this->g + 0.2, this->b + 0.1);
 		glBegin(GL_TRIANGLES);
 			glVertex3f(this->x * - 1, this->y * - 1, this->z * - 1);
 			glVertex3f(this->x * - 1, this->y * - 1, this->z);
@@ -62,7 +67,7 @@ public:
 		glEnd();
 
 		// Right
-		glColor3f(0.2f, 0.2f, 0.2f);
+		glColor3f(this->r - 0.2, this->g - 0.1, this->b - 0.3);
 		glBegin(GL_TRIANGLES);
 			glVertex3f(this->x, this->y, this->z);
 			glVertex3f(this->x, this->y, this->z * - 1);
@@ -75,7 +80,7 @@ public:
 		glEnd();
 
 		// Top
-		glColor3f(0.6f, 0.0f, 0.0f);
+		glColor3f(this->r + 0.2, this->g - 0.3, this->b - 0.5);
 		glBegin(GL_TRIANGLES);
 			glVertex3f(this->x, this->y, this->z);
 			glVertex3f(this->x, this->y, this->z * - 1);
@@ -88,7 +93,7 @@ public:
 		glEnd();
 
 		// Bottom
-		glColor3f(0.4f, 0.0f, 0.4f);
+		glColor3f(this->r, this->g - 0.3, this->b - 0.1);
 		glBegin(GL_TRIANGLES);
 			glVertex3f(this->x * - 1, this->y * - 1, this->z * - 1);
 			glVertex3f(this->x * - 1, this->y * - 1, this->z);
@@ -123,7 +128,7 @@ void display()
 		glRotatef(rrZ, 0.0f, 0.0f, 1.0f);
 		glTranslatef(0.5, 0.5, 0.5);
 		glRotatef(rZ, 1.0f, 1.0f, 0.0f);
-		cubes[0].draw();
+		cubes[1].draw();
 	glPopMatrix();
 
 	glFlush();
@@ -145,8 +150,8 @@ int main(int argc, char **argv)
 	// Initialize GLUT and process user parameters
 	glutInit(&argc, argv);
 
-	cubes[0] = Cube(0.1, 0.1, 0.1);
-	cubes[1] = Cube(0.1, 0.1, 0.1);
+	cubes[0] = Cube(0.1, 0.1, 0.1, 0.4, 0.3, 0.5);
+	cubes[1] = Cube(0.1, 0.1, 0.1, 0.8, 0.7, 0.9);
 
 	// Request double buffered true color window with Z-buffer
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
