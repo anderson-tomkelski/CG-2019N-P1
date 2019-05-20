@@ -5,6 +5,11 @@
 GLfloat rX = 0;
 // Rotate Y
 GLfloat rY = 0;
+GLfloat rZ = 0;
+GLfloat rrZ = 0;
+
+const float FRAMES_PER_SECOND = 30;
+const float UPDATE_INTERVAL_MS = 1000 / FRAMES_PER_SECOND;
 
 class Cube {
 public:
@@ -111,14 +116,17 @@ void display()
 	// Reset transformations
 	glLoadIdentity();
 
-	// Rotate when user changes rX and rY
-	glRotatef(rX, 1.0f, 0.0f, 0.0f);
-	glRotatef(rY, 0.0f, 1.0f, 0.0f);
+	glPushMatrix();
+		glRotatef(rY, 0.0f, 1.0f, 0.0f);	
+		cubes[0].draw();
+	glPopMatrix();
 
-	cubes[0].draw();
-
-	glTranslatef(0.5, 0.5, 0.5);
-	cubes[0].draw();
+	glPushMatrix();
+		glRotatef(rrZ, 0.0f, 0.0f, 1.0f);
+		glTranslatef(0.5, 0.5, 0.5);
+		glRotatef(rZ, 1.0f, 1.0f, 0.0f);
+		cubes[0].draw();
+	glPopMatrix();
 
 	glFlush();
 	glutSwapBuffers();
@@ -138,6 +146,15 @@ void keyboard(int key, int x, int y)
 
 	// Request display update
 	glutPostRedisplay();
+}
+
+void update(int value)
+{
+	rY -= 5;
+	rZ -= 5;
+	rrZ += 5;
+	glutPostRedisplay();
+	glutTimerFunc(UPDATE_INTERVAL_MS, update, 0);
 }
 
 
@@ -166,6 +183,7 @@ int main(int argc, char **argv)
 	glutSpecialFunc(keyboard);
 
 	// Pass control to GLUT for events
+	glutTimerFunc(UPDATE_INTERVAL_MS, update, 0);
 	glutMainLoop();
 
 	return 0;
