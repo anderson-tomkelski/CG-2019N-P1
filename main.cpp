@@ -1,3 +1,12 @@
+/**
+* O objetivo desse trabalho é mostrar dois cubos coloridos girando, um ao centro da tela e outro orbitando
+* ao redor desse primeiro
+* Nome: Anderson Altair Tomkelski
+* Email: ander.tomkelski@gmail.com
+*
+*
+**/
+
 #include <GL/glut.h>
 #include <GL/gl.h>
 
